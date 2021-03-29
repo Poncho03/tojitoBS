@@ -63,7 +63,6 @@ export class AjustesPage implements OnInit {
     this.firestore.doc("usuarios/"+id).valueChanges().subscribe( data => {
       this.user.nombre = data["nombre"];
       this.user.correo = data["correo"];
-      this.user.tel = data["tel"];
       this.user.contrasena = data["contrasena"];
     });
     loader.dismiss();
@@ -93,41 +92,6 @@ export class AjustesPage implements OnInit {
     let data = result.data.values.name;
     if(data != ""){
       this.dataService.dataName(data, this.user.id);
-    }
-    else{
-      this.dataService.showToast("No se hicieron cambios.");
-    }
-  }
-
-  //Actualizar telefono de usuario
-  async showAlertInputTel() {
-    const alert = await this.alertCtrl.create({
-      header: "Teléfono De Contacto de Usuario",
-      message: "Puedes cambiar tu número de teléfono cuantas veces quieras. Ingresa uno.<br>"+
-                "Recuerda que el télefono debe ser a 10 dígitos.<br><br>"+
-                "Actual:<br>"+this.user.tel,
-      inputs: [
-        {
-          type: 'text',
-          name: 'tel',
-          placeholder: "Nuevo Número de Teléfono",
-          attributes: {
-            minlength: 10,
-            maxlength: 10
-          }
-        }
-      ],
-      buttons: [
-        { text: 'Aceptar' },
-        { text: 'Cancelar' }
-      ],
-      backdropDismiss: false
-    });
-    await alert.present();
-    let result = await alert.onDidDismiss();
-    let data = result.data.values.tel;
-    if(data != ""){
-      this.dataService.dataTel(data, this.user.id);
     }
     else{
       this.dataService.showToast("No se hicieron cambios.");

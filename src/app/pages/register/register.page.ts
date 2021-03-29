@@ -24,7 +24,9 @@ export class RegisterPage implements OnInit {
   }
 
   registro(){
-    this.dataService.registro(this.user)
+    localStorage.setItem('username',this.user.nombre);
+    localStorage.setItem('useremail',this.user.correo);
+    this.dataService.registro(this.user);
   }
 
 }

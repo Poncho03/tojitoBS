@@ -1,20 +1,16 @@
-<ion-content>
+<ion-content class="ion-text-center">
 
-  <ion-card class="intro" mode="md">
-    <ion-card-header>
-      <ion-avatar class="logo"> <img src="assets/icon/logoalbondiga.png"/> </ion-avatar>
-      <h1 class="ion-text-center Panettone">Tojito</h1>
-    </ion-card-header>
-  </ion-card>
+  <div class="image">
+    <ion-img src="assets/icon/logoalbondiga.png" class="logo"></ion-img>
+    <h1 class="PanettoneDEMO">Tojito Bussines</h1>
+    <ion-text color="dark"><h5>Iniciar sesión</h5></ion-text>
+  </div>
 
-  <!-- Card de inicio de sesión -->
-  <ion-card class="intro">
-    <ion-card-header class="ion-text-center">
-      <ion-card-subtitle>Iniciar sesión</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <form #formulario="ngForm" class="intro">
-        <ion-item>
+  <!-- Formulario de inicio de sesión -->
+  <form #formulario="ngForm">
+    <ion-card mode="md">
+      <ion-card-content>
+        <ion-item lines="none">
           <ion-icon slot="start" name="at"></ion-icon>
           <ion-input
             type="email"
@@ -25,7 +21,12 @@
             required>
           </ion-input>
         </ion-item>
-        <ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card mode="md">
+      <ion-card-content>
+        <ion-item lines="none">
           <ion-icon slot="start" name="shield"></ion-icon>
           <ion-input
             type="password"
@@ -36,19 +37,24 @@
             required>
           </ion-input>
         </ion-item>
-      </form>
-    </ion-card-content>
-    <ion-button expand="full" color="orange" (click)="entrar()" [disabled]="formulario.invalid">
-      Entrar
-    </ion-button>
-  </ion-card>
+      </ion-card-content>
+    </ion-card>
+  </form>
+
+  <ion-button color="pink"
+              (click)="entrar()"
+              mode="ios"
+              size="large"
+              [disabled]="formulario.invalid">
+    Entrar
+  </ion-button>
 
 </ion-content>
 
-<ion-footer class="ion-no-border">
+<ion-footer class="ion-no-border ion-text-center" mode="md">
   <ion-toolbar>
-    <ion-button expand="full" fill="clear" color="medium" routerLink="/register">
-      Registrarme
+    <ion-button fill="clear" color="dark" mode="ios" routerLink="/register">
+      No tengo una cuenta
     </ion-button>
   </ion-toolbar>
 </ion-footer>

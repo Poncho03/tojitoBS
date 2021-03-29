@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { LoadingController, NavController, ToastController } from '@ionic/angular';
 import { Menu } from '../interface/menu';
 import { Negocio } from '../interface/negocio';
@@ -18,7 +19,8 @@ export class DataService {
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
     private firestore: AngularFirestore,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private afStorage: AngularFireStorage
   ) { }
 
   async getUser(){
@@ -34,56 +36,49 @@ export class DataService {
       message: 'Por favor espere...'
     });
     (await loader).present();
-
-    try{
-      await this.afAuth.signInWithEmailAndPassword(us.correo, us.contrasena).then(data => {
-        console.log(data);
-        this.navCtrl.navigateRoot('home');
-      })
-    }
-    catch(e){
-      this.showToast('El correo electrónico o contraseña son incorrectos, verifique sus datos.');
-    }
+    await this.afAuth.signInWithEmailAndPassword(us.correo, us.contrasena).then(() => {
+      this.navCtrl.navigateRoot('home');
+    }).catch(error => {
+      console.log(error);
+      if (error.code === 'auth/network-request-failed') {
+        this.showToast('Tenemos problemas de conexión, por favor, intente más tarde.');
+      }
+      else {
+        if (error.code === 'auth/user-not-found') {
+          this.showToast('El correo electrónico ingresado no se encuentra registrado.');
+        }
+        else {
+          this.showToast('Ups!, parece que la contraseña es incorrecta, intenta de nuevo.');
+        }
+      }
+    });
     (await loader).dismiss();
   }
 
   //Página de registro de usuario (Register Page)
   async registro(us: Usuario){
     let loader = this.loadingCtrl.create({
-      message: 'Por favor espere...'
+      message: 'Validando credenciales...'
     });
     (await loader).present();
-
-    try{
-      await this.afAuth.createUserWithEmailAndPassword(us.correo, us.contrasena).then(d => {
-        this.creaUsuario(us, d.user.uid)
-        this.data(us);
+    await this.afAuth.createUserWithEmailAndPassword(us.correo, us.contrasena).then(d => {
+      d.user.updateProfile({
+        displayName: us.nombre,
+        photoURL: 'https://firebasestorage.googleapis.com/v0/b/musk-ee343.appspot.com/o/userNull.jpg?alt=media&token=2bb00da0-be22-42e4-8827-67ca3ed67b84',
       });
-    }
-    catch(e){
-      this.showToast("La dirección de correo ya ha sido registrada anteriormente, intenta con otra.");
-    }
-    (await loader).dismiss();
-  }
-
-  //Actualizar datos de usuario tras registro
-  async updateUser(us: Usuario){
-    try{
-      await this.afAuth.signInWithEmailAndPassword(us.correo, us.contrasena).then(data => {
-        console.log(data);
+      this.creaUsuario(us, d.user.uid).then(()=>{
         this.navCtrl.navigateRoot('nego1');
       })
-    }
-    catch(e){}
-  }
-
-  //Agregar datos al perfil
-  async data(us: Usuario){
-    this.updateUser(us);
-    (await this.afAuth.currentUser).updateProfile({
-      displayName: us.nombre,
-      photoURL: 'assets/icon/userNull.jpg'
+    }).catch(error => {
+      console.log(error);
+      if(error.code === 'auth/network-request-failed'){
+        this.showToast('Tenemos problemas de conexión, por favor, intente más tarde.');
+      }
+      else{
+        this.showToast('La dirección de correo electrónico ya se encuentra registrada.');
+      }
     });
+    (await loader).dismiss();
   }
 
   //Agrega usuario a su colección
@@ -266,6 +261,39 @@ export class DataService {
       this.showToast('Ha ocurrido un error, intente más tarde');
     });
     (await loader).dismiss();
+  }
+
+  //----------------------------------------------------------------------------
+  //Subir y descarga de archivos multimedia
+
+  //Subir archivos
+  async uploadFile(data: string[], id: string){
+    let refArray: string[] = [];
+    for (let i = 0; i < data.length; i++) {
+      let loader = await this.loadingCtrl.create({
+        message: 'Subiendo archivos multimedia... ('+(i+1)+'/'+data.length+')'
+      });
+      (await loader).present();
+      let ref = 'negocios/' + id + '/foto#0' + i + '.jpg';
+      await this.afStorage.storage.ref().child(ref).putString(data[i], 'data_url').then(() => {
+        refArray.push(ref);
+      });
+      (await loader).dismiss();
+    }
+    return refArray;
+  }
+
+  //Descargar archivos
+  async downloadFile(ref: string[]){
+    let linkFotos: string[] = [];
+    for (let i = 0; i < ref.length; i++) {
+      await this.afStorage.storage.ref().child(ref[i]).getDownloadURL().then(d => {
+        linkFotos.push(d);
+      }).catch(e => {
+        console.log(e);
+      });
+    }
+    return linkFotos;
   }
 
   //Mensaje

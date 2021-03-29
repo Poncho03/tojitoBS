@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { NavController } from '@ionic/angular';
 import { Usuario } from 'src/app/interface/usuario';
 import { DataService } from 'src/app/services/data.service';
 
@@ -16,9 +14,7 @@ export class LoginPage implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private firestore: AngularFirestore,
-    private afAuth: AngularFireAuth,
-    private navCtrl: NavController
+    private afAuth: AngularFireAuth
   ) { }
 
   ngOnInit() {

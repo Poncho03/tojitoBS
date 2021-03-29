@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-title>Agregar Servicios</ion-title>
   </ion-toolbar>
@@ -6,20 +6,22 @@
 
 <ion-content>
 
-  <ion-item>
-    <ion-icon slot="start" name="hand-left"></ion-icon>
-    <ion-input type="text"
-              placeholder="Agrega un servicio que ofrezcas"
-              [(ngModel)]="servicio">
-    </ion-input>
-    <ion-buttons slot="end">
-      <ion-button (click)="addService()">
-        <ion-icon slot="icon-only" name="add"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-item>
+  <ion-card mode="md">
+    <ion-item>
+      <ion-icon slot="start" name="hand-left"></ion-icon>
+      <ion-input type="text"
+                placeholder="Agrega un servicio que ofrezcas"
+                [(ngModel)]="servicio">
+      </ion-input>
+      <ion-buttons slot="end">
+        <ion-button (click)="addService()">
+          <ion-icon slot="icon-only" name="add"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-card>
 
-  <ion-card *ngIf="services.length != 0">
+  <ion-card *ngIf="services.length != 0" mode="md">
     <ion-card-content>
       <ion-item *ngFor="let item of services">
         <ion-label class="ion-text-wrap ion-text-capitalize">{{item}}</ion-label>
@@ -32,7 +34,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="services.length == 0">
+  <ion-card *ngIf="services.length == 0" mode="md">
     <ion-card-title class="ion-text-center">
       <br>Los servicios que agregues se irán visualizando en esta sección<br><br>
     </ion-card-title>
@@ -40,8 +42,11 @@
 
 </ion-content>
 
-<ion-footer>
-  <ion-button (click)="saveServices()" expand="block" color="purple">
+<ion-footer class="ion-no-border">
+  <ion-button (click)="saveServices()"
+              expand="block"
+              color="purple"
+              mode="ios">
     Guardar Servicios
   </ion-button>
 </ion-footer>

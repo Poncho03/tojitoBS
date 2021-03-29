@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'servicios', loadChildren: () => import('./pages/servicios/servicios.module').then( m => m.ServiciosPageModule) },
   { path: 'editservices', loadChildren: () => import('./pages/editservices/editservices.module').then( m => m.EditservicesPageModule) },
   { path: 'editmenu', loadChildren: () => import('./pages/editmenu/editmenu.module').then( m => m.EditmenuPageModule) },
-  { path: 'ajustes', loadChildren: () => import('./pages/ajustes/ajustes.module').then( m => m.AjustesPageModule) }
+  { path: 'ajustes', loadChildren: () => import('./pages/ajustes/ajustes.module').then( m => m.AjustesPageModule) },
+  { path: 'fotosneg', loadChildren: () => import('./pages/fotosneg/fotosneg.module').then( m => m.FotosnegPageModule) }
 ];
 
 @NgModule({

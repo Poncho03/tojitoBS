@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ActionSheetController, ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { Negocio } from 'src/app/interface/negocio';
 import { Usuario } from 'src/app/interface/usuario';
 import { DataService } from 'src/app/services/data.service';
+import { FotosnegPage } from '../fotosneg/fotosneg.page';
 import { MenuPage } from '../menu/menu.page';
 import { ServiciosPage } from '../servicios/servicios.page';
 
@@ -19,15 +20,16 @@ export class Nego2Page implements OnInit {
   negocio = {} as Negocio;
   statusMen: boolean = true;
   statusSer: boolean = true;
+  statusFotos: boolean = true;
   statusBotMen: string = "outline";
   statusBotSer: string = "outline";
+  statusBotFotos: string = "outline";
 
   constructor(
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
     private dataService: DataService,
     private modalCtrl: ModalController,
-    private actionSheetCtrl: ActionSheetController,
     private navCtrl: NavController
   ) { }
 
@@ -61,6 +63,7 @@ export class Nego2Page implements OnInit {
     });
   }
 
+  //Pantalla  superpuesta de menu
   async openModalMenu(){
     const modal = await this.modalCtrl.create({
       component: MenuPage
@@ -79,6 +82,7 @@ export class Nego2Page implements OnInit {
     }
   }
 
+  //Pantalla  superpuesta de servicios
   async openModalServices(){
     const modal = await this.modalCtrl.create({
       component: ServiciosPage
@@ -97,16 +101,23 @@ export class Nego2Page implements OnInit {
     }
   }
 
-  async openActionSheet(){
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Seleccionar archivo de...',
-      buttons: [
-        { text: 'Cámara', icon: 'camera' },
-        { text: 'Galeria', icon: 'image' },
-        { text: 'Cancelar', role: 'cancel', icon: 'close' }
-      ]
-    });
-    await actionSheet.present();
+  //Pantalla  superpuesta de fotos
+  async openModalPhotos(){
+    const modal = await this.modalCtrl.create({
+      component: FotosnegPage
+    })
+    await modal.present();
+
+    const {data} = await modal.onDidDismiss();
+    if (data.fotos.length != 0) {
+      this.negocio.fotos = data.fotos;
+      this.statusFotos = false;
+      this.statusBotFotos = "solid";
+      console.log(this.negocio.fotos);
+    }
+    else {
+      this.dataService.showToast("No se agregaron fotografías, por favor, agregue algunas.");
+    }
   }
 
   envioNeg2(){

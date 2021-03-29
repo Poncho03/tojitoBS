@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-title>Registro - Etapa II</ion-title>
   </ion-toolbar>
@@ -6,18 +6,23 @@
 
 <ion-content>
 
-  <ion-card>
-    <ion-card-content>
-      Muy bien <strong>{{user.nombre}}</strong>. <br>El registro para su negocio
-      <strong>{{negocio.nombre}}</strong> está por concluir, a continuación, llene
-      los campos que se le piden para finalizar el registro y comenzar a
-      disfrutar de los beneficios que le ofrecemos.
-    </ion-card-content>
-  </ion-card>
+  <div class="base">
+    <ion-text><h2>Ya estamos finalizando</h2></ion-text>
+    <ion-text color="dark">
+      <p>El registro para su negocio:</p>
+    </ion-text>
+    <ion-text>
+      <ion-badge color="pink"><h5>{{negocio.nombre}}</h5></ion-badge>
+    </ion-text>
+    <ion-text color="dark">
+      <p>está por concluir, a continuación, llene los campos que se le piden para finalizar
+        el registro y comenzar a disfrutar de los beneficios que le ofrecemos.</p>
+    </ion-text>
+  </div>
 
-  <ion-card>
-    <form #formulario="ngForm" class="intro">
-      <ion-item>
+  <form #formulario="ngForm">
+    <ion-card>
+      <ion-item lines="none">
         <ion-icon slot="start" name="megaphone"></ion-icon>
         <ion-input
         type="text"
@@ -27,7 +32,9 @@
           required>
         </ion-input>
       </ion-item>
-      <ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item lines="none">
         <ion-icon slot="start" name="pencil"></ion-icon>
         <ion-input
           type="text"
@@ -37,30 +44,41 @@
           required>
         </ion-input>
       </ion-item>
-    </form>
-  </ion-card>
+    </ion-card>
+  </form>
 
-  <ion-card>
-    <ion-button expand="block" color="primary" fill="{{statusBotSer}}" (click)="openModalServices()">
-      Agregar Servicios
-    </ion-button>
-    <ion-button expand="block" color="orange" fill="{{statusBotMen}}" (click)="openModalMenu()">
-      Agregar Menú
-    </ion-button>
-    <ion-button expand="block" color="warning" fill="solid" (click)="openActionSheet()">
-      Agregar Fotografía
-    </ion-button>
-  </ion-card>
+  <ion-button expand="block"
+              color="blue"
+              fill="{{statusBotSer}}"
+              mode="ios"
+              (click)="openModalServices()">
+    Agregar Servicios
+  </ion-button>
+  <ion-button expand="block"
+              color="blue"
+              fill="{{statusBotMen}}"
+              mode="ios"
+              (click)="openModalMenu()">
+    Agregar Menú
+  </ion-button>
+  <ion-button expand="block"
+              color="blue"
+              fill="{{statusBotFotos}}"
+              mode="ios"
+              (click)="openModalPhotos()">
+    Agregar Fotografía
+  </ion-button>
 
 </ion-content>
 
-<ion-footer>
+<ion-footer class="ion-no-border">
   <ion-toolbar>
     <ion-button (click)="envioNeg2()"
                 expand="block"
-                color="purple"
-                [disabled]="formulario.invalid || (statusMen || statusSer)">
-      Enviar Solicitud de Etapa II
+                color="blue"
+                mode="ios"
+                [disabled]="formulario.invalid || (statusMen || statusSer || statusFotos)">
+      Mandar solicitud
     </ion-button>
   </ion-toolbar>
 </ion-footer>

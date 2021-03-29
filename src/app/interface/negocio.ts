@@ -2,7 +2,7 @@ export interface Negocio {
     nombre: string,
     direccion: string,
     servicios: [],
-    //foto: string,
+    fotos: string[],
     desc: string,
     eslogan: string,
     tel: string,

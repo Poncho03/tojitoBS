@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-title>Agregar Menú</ion-title>
   </ion-toolbar>
@@ -6,25 +6,31 @@
 
 <ion-content>
 
-  <ion-item>
-    <ion-icon slot="start" name="restaurant"></ion-icon>
-    <ion-input type="text"
-              placeholder="Nombre del platillo"
-              [(ngModel)]="nombre">
-    </ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-icon slot="start" name="cash"></ion-icon>
-    <ion-input type="number"
-              placeholder="Precio del platillo"
-              [(ngModel)]="precio">
-    </ion-input>
-  </ion-item>
-  <ion-button (click)="addFood()" expand="block" color="orange">
-    Agregar Al Menú
-  </ion-button>
+  <ion-card mode="md">
+    <ion-item>
+      <ion-icon slot="start" name="restaurant"></ion-icon>
+      <ion-input type="text"
+                placeholder="Nombre del platillo"
+                [(ngModel)]="nombre">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="cash"></ion-icon>
+      <ion-input type="number"
+                placeholder="Precio del platillo"
+                [(ngModel)]="precio">
+      </ion-input>
+    </ion-item>
+    <ion-button (click)="addFood()"
+                expand="block"
+                color="orange"
+                mode="ios">
+      Agregar Al Menú
+    </ion-button>
+    
+  </ion-card>
 
-  <ion-card *ngIf="menuFull.length != 0">
+  <ion-card *ngIf="menuFull.length != 0" mode="md">
     <ion-card-content>
       <ion-item *ngFor="let item of menuFull">
         <ion-label class="ion-text-wrap ion-text-capitalize">{{item.nombre}}</ion-label>
@@ -38,7 +44,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="menuFull.length == 0">
+  <ion-card *ngIf="menuFull.length == 0" mode="md">
     <ion-card-title class="ion-text-center">
       <br>Los platillos que agregues se irán visualizando en esta sección<br><br>
     </ion-card-title>
@@ -46,8 +52,11 @@
 
 </ion-content>
 
-<ion-footer>
-  <ion-button (click)="saveMenu()" expand="block" color="purple">
+<ion-footer class="ion-no-border">
+  <ion-button (click)="saveMenu()"
+              expand="block"
+              color="purple"
+              mode="ios">
     Guardar Menú
   </ion-button>
 </ion-footer>

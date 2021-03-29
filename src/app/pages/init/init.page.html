@@ -1,94 +1,97 @@
 <ion-content>
 
-  <ion-card class="intro" mode="md">
-    <ion-card-header>
-      <ion-avatar class="logo"> <img src="assets/icon/logoalbondiga.png"/> </ion-avatar>
-      <h1 class="ion-text-center Panettone">Tojito</h1>
-    </ion-card-header>
-  </ion-card>
+    <div class="image">
+      <ion-img src="assets/icon/logoalbondiga.png" class="logo"></ion-img>
+      <h1 class="ion-text-center PanettoneDEMO" style="margin-top: 2%;">Tojito Bussines</h1>
+    </div>
 
-  <ion-card class="intro">
-    
-    <ion-slides pager="ios">
+    <ion-card mode="md" class="ion-text-center">
+  
+      <ion-card-content style="height: 80%;">
+  
+        <ion-slides mode="ios" style="height: 100%;">
+  
+          <ion-slide>
+            <ion-icon name="storefront"></ion-icon>
+            <ion-text color="dark">
+              <h1 style="margin-bottom: 5%;">Tú negocio en línea</h1>
+            </ion-text>
+            <ion-text>
+              <h2 class="ion-text-center">Da a conocer tu negocio en toda la zona para que los
+              clientes acudan a tu establecimiento, haz crecer tus ventas.</h2>
+            </ion-text>
+            <ion-text color="dark">
+              <h3 style="margin-top: 5%;">Desliza para ver más información</h3>
+            </ion-text>
+          </ion-slide>
+  
+          <ion-slide>
+            <ion-icon name="shield"></ion-icon>
+            <ion-text color="dark">
+              <h1 style="margin-bottom: 5%;">Totalmente seguro</h1>
+            </ion-text>
+            <ion-text>
+              <h2 class="ion-text-center">Registrate para tener todos los beneficios que te ofrecemos,
+              sólo tu podrás acceder a la información de tu negocio.</h2>
+            </ion-text>
+            <ion-text color="dark">
+              <h3 style="margin-top: 5%;">Desliza para ver más información</h3>
+            </ion-text>
+          </ion-slide>
+  
+          <ion-slide>
+            <ion-icon name="restaurant"></ion-icon>
+            <ion-text color="dark">
+              <h1 style="margin-bottom: 5%;">Tú comida. tú sazón</h1>
+            </ion-text>
+            <ion-text>
+              <h2 class="ion-text-center">Publica tu menú, de esta manera
+                se reducen los tiempos de espera en pedidos y ayudas al medio ambiente
+                al no usar las cartas tradicionales.</h2>
+            </ion-text>
+            <ion-text color="dark">
+              <h3 style="margin-top: 5%;">Desliza para ver más información</h3>
+            </ion-text>
+          </ion-slide>
+  
+          <ion-slide>
+            <ion-icon name="people"></ion-icon>
+            <ion-text color="dark">
+              <h1 style="margin-bottom: 5%;">Expándete</h1>
+            </ion-text>
+            <ion-text>
+              <h2 class="ion-text-center">Haz que la gente te conozca utilizando
+                utilizando el poder de la tecnología, tus clientes sabrán de tu
+                negocio estén donde estén.
+              </h2>
+            </ion-text>
+            <ion-text color="dark">
+              <h3 style="margin-top: 5%;">Disfruta de los beneficios que te ofrecemos</h3>
+            </ion-text>
 
-      <ion-slide>
-        <ion-card class="intro" mode="md">
-          <ion-card-header>
-            <ion-icon name="storefront" style="font-size: 80px;"></ion-icon>
-          </ion-card-header>
-          <ion-card-content>
-            <h2 class="ion-text-center">
-              <strong>Tu negocio en línea.</strong><br><br>
-              Da a conocer tu negocio en toda la zona para que los
-              clientes acudan a tu establecimiento, haz crecer tu
-              negocio.<br><br>
-            </h2>
-          </ion-card-content>
-        </ion-card>
-      </ion-slide>
-
-      <ion-slide>
-        <ion-card class="intro" mode="md">
-          <ion-card-header>
-            <ion-icon name="shield" style="font-size: 80px;"></ion-icon>
-          </ion-card-header>
-          <ion-card-content>
-            <h2 class="ion-text-center">
-              <strong>Todos tus datos están seguros.</strong><br><br>
-              Registrate para tener todos los beneficios que te ofrece Tojito
-              Business de una forma segura, sólo tu podrás acceder a la
-              información de tu negocio.<br>
-            </h2>
-          </ion-card-content>
-        </ion-card>
-      </ion-slide>
-
-      <ion-slide>
-        <ion-card class="intro" mode="md">
-          <ion-card-header>
-            <ion-icon name="restaurant" style="font-size: 80px;"></ion-icon>
-          </ion-card-header>
-          <ion-card-content>
-            <h2 class="ion-text-center">
-              <strong>¿Qué comida ofreces?</strong><br><br>
-              Da a conocer el menú de tu restaurante a tus clientes, de esta manera
-              se reducen los tiempos de espera en pedidos y ayudas al medio ambiente
-              al no usar las cartas tradicionales.<br><br>
-            </h2>
-          </ion-card-content>
-        </ion-card>
-      </ion-slide>
-
-      <ion-slide>
-        <ion-card class="intro" mode="md">
-          <ion-card-header>
-            <ion-icon name="time" style="font-size: 80px;"></ion-icon>
-          </ion-card-header>
-          <ion-card-content>
-            <h2 class="ion-text-center">
-              <strong>Publica tus horarios.</strong><br> <br>
-              Los clientes tendrán la certeza de que estarás ahí para atenderlos
-              con todo gusto. Mantén actualizado tus horarios en todo momento.<br><br>
-            </h2>
-          </ion-card-content>
-        </ion-card>
-      </ion-slide>
-
-    </ion-slides>
-
-  </ion-card>
+          </ion-slide>
+  
+        </ion-slides>
+  
+        <ion-button routerLink="/login"
+                    color="blue"
+                    mode="ios"
+                    style="margin-top: 5%;">
+          Empezar
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
 
 </ion-content>
 
-<ion-footer>
-  <div style="float: left; width: 50%;">
-    <ion-button expand="block" color="purple" routerLink="/login">
-      Iniciar sesión
-    </ion-button>
-  </div>
-  <div style="float: left; width: 50%;">
-    <ion-button expand="block" color="orange" routerLink="/register">
-      Registrarme
-    </ion-button>
-  </div>
+<!--
+<ion-footer class="ion-no-border ion-padding">
+  <ion-button expand="block" color="purple" mode="ios" routerLink="/login">
+    Iniciar sesión
+  </ion-button>
+  
+  <ion-button expand="block" color="orange" mode="ios" routerLink="/register">
+    Registrarme
+  </ion-button>
 </ion-footer>
+-->

@@ -11,11 +11,14 @@ import { MenuPage } from '../menu/menu.page';
 import { ServiciosPage } from '../servicios/servicios.page';
 import { MenuPageModule } from '../menu/menu.module';
 import { ServiciosPageModule } from '../servicios/servicios.module';
+import { FotosnegPage } from '../fotosneg/fotosneg.page';
+import { FotosnegPageModule } from '../fotosneg/fotosneg.module';
 
 @NgModule({
   entryComponents: [
     MenuPage,
-    ServiciosPage
+    ServiciosPage,
+    FotosnegPage
   ],
   imports: [
     CommonModule,
@@ -23,7 +26,8 @@ import { ServiciosPageModule } from '../servicios/servicios.module';
     IonicModule,
     Nego2PageRoutingModule,
     MenuPageModule,
-    ServiciosPageModule
+    ServiciosPageModule,
+    FotosnegPageModule
   ],
   declarations: [Nego2Page]
 })

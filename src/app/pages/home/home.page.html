@@ -1,9 +1,9 @@
-<ion-header>
+<ion-header class="ion-no-border" mode="md">
   <ion-toolbar>
-    <ion-title>Mi Negocio</ion-title>
+    <ion-title class="PanettoneTitle">Tojito Bussines</ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="/ajustes">
-        <ion-icon slot="icon-only" name="settings"></ion-icon>
+        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -11,26 +11,27 @@
 
 <ion-content>
 
-<div style="width: auto; height: 40%;">
+<div class="images">
   <ion-slides pager="true" style="width: auto; height: 100%">
-    <ion-slide *ngFor="let slide of slides">
-      <img [src]="slide.img">
+    <ion-slide *ngFor="let item of neg.fotos">
+      <ion-img src="{{item}}"></ion-img>
     </ion-slide>
   </ion-slides>
 </div>
 
-<ion-card mode="md">
-
-  <ion-item mode="md">
+<ion-card>
+  <ion-item>
     <ion-icon slot="start" name="storefront"></ion-icon>
     <ion-label class="ion-text-capitalize">
-      <p>Negocio</p>
+      <p>Nombre del Negocio</p>
       <h2 class="ion-text-capitalize">{{neg.nombre}}</h2>
     </ion-label>
     <ion-icon slot="end" name="pencil" (click)="showAlertInputName()"></ion-icon>
   </ion-item>
+</ion-card>
 
-  <ion-item mode="md">
+<ion-card>
+  <ion-item lines="none">
     <ion-icon slot="start" name="megaphone"></ion-icon>
     <ion-label class="ion-text-capitalize">
       <p>Eslogan</p>
@@ -38,17 +39,21 @@
     </ion-label>
     <ion-icon slot="end" name="pencil" (click)="showAlertInputEslogan()"></ion-icon>
   </ion-item>
+</ion-card>
 
-  <ion-item mode="md">
-    <ion-icon slot="start" name="map"></ion-icon>
+<ion-card>
+  <ion-item lines="none">
+    <ion-icon slot="start" name="navigate"></ion-icon>
     <ion-label class="ion-text-capitalize">
       <p>Dirección</p>
       <h2 class="ion-text-wrap">{{neg.direccion}}</h2>
     </ion-label>
     <ion-icon slot="end" name="pencil" (click)="showAlertInputDir()"></ion-icon>
   </ion-item>
+</ion-card>
 
-  <ion-item mode="md">
+<ion-card>
+  <ion-item lines="none">
     <ion-icon slot="start" name="call"></ion-icon>
     <ion-label>
       <p>Teléfono De Negocio</p>
@@ -56,28 +61,29 @@
     </ion-label>
     <ion-icon slot="end" name="pencil" (click)="showAlertInputTel()"></ion-icon>
   </ion-item>
+</ion-card>
 
-  <ion-item mode="md">
-    <ion-icon slot="start" name="receipt"></ion-icon>
+<ion-card>
+  <ion-item lines="none">
+    <ion-icon slot="start" name="newspaper"></ion-icon>
     <ion-label class="ion-text-capitalize">
       <p>Descripción Del Negocio</p>
       <h2 class="ion-text-wrap">{{neg.desc}}</h2>
     </ion-label>
     <ion-icon slot="end" name="pencil" (click)="showAlertInputDesc()"></ion-icon>
   </ion-item>
-
 </ion-card>
 
 </ion-content>
 
-<ion-footer>
+<ion-footer class="ion-no-border" mode="md">
   <div style="float: left; width: 50%;">
-    <ion-button expand="block" color="purple" (click)="openModalMenu()">
+    <ion-button expand="block" color="pink" (click)="openModalMenu()">
       Ver Menú
     </ion-button>
   </div>
   <div style="float: left; width: 50%;">
-    <ion-button expand="block" color="orange" (click)="openModalservicios()">
+    <ion-button expand="block" color="blue" (click)="openModalservicios()">
       Ver Servicios
     </ion-button>
   </div>

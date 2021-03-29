@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar Fotos Del Negocio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-button (click)="openActionSheetPhotos()" expand="block" disabled="{{this.numFotos == 0}}">
+    Insertar foto ({{numFotos}})
+  </ion-button>
+
+  <ion-card *ngIf="auxFotos.length === 0">
+    <ion-card-title class="ion-text-center">
+      <br>Las fotos que agregues se irán visualizando en esta sección<br><br>
+    </ion-card-title>
+  </ion-card>
+
+  <ion-grid *ngIf="auxFotos.length != 0">
+    <ion-row>
+      <ion-col size="{{12 / auxFotos.length}}" *ngFor="let item of auxFotos">
+        <ion-img src="{{item}}"></ion-img>
+        <ion-button (click)="borrarFoto(item)" expand="block" fill="clear">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+  <ion-button (click)="savePhotos()" expand="block" color="purple">
+    Guardar Fotos
+  </ion-button>
+</ion-footer>
+

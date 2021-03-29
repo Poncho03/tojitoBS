@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AlertController, LoadingController, ModalController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { Negocio } from 'src/app/interface/negocio';
 import { Usuario } from 'src/app/interface/usuario';
 import { DataService } from 'src/app/services/data.service';
@@ -18,19 +18,12 @@ export class HomePage implements OnInit {
   user = {} as Usuario;
   neg = {} as Negocio;
 
-  slides = [
-    { img: 'assets/img/mujer.jpeg' },
-    { img: 'assets/img/pastel.jpeg' },
-    { img: 'assets/img/dinero.jpeg' }
-  ];
-
   constructor(
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
     private modalCtrl: ModalController,
     private dataService: DataService,
     private alertCtrl: AlertController,
-    private navCtrl: NavController,
     private loadingCtrl: LoadingController
   ) { }
 
@@ -100,6 +93,7 @@ export class HomePage implements OnInit {
       this.neg.desc = data["desc"];
       this.neg.tel = data["tel"];
       this.neg.menu = data["menu"];
+      this.neg.fotos = data["fotos"];
     });
     loader.dismiss();
   }
@@ -128,10 +122,6 @@ export class HomePage implements OnInit {
     await modal.onDidDismiss().then(()=>{
       this.getBusinessById(this.user.id)
     })
-  }
-
-  logOut(){
-    this.dataService.singOut();
   }
 
   deleteAccount(){
@@ -164,9 +154,6 @@ export class HomePage implements OnInit {
     if(data != ""){
       this.dataService.updateDataName(data, this.user.id);
     }
-    else{
-      this.dataService.showToast("No se hicieron cambios.");
-    }
   }
   //Actualizar eslogan
   async showAlertInputEslogan() {
@@ -191,9 +178,6 @@ export class HomePage implements OnInit {
     let data = result.data.values.eslogan;
     if(data != ""){
       this.dataService.updateDataEslogan(data, this.user.id);
-    }
-    else{
-      this.dataService.showToast("No se hicieron cambios.");
     }
   }
   //Actualizar direccion
@@ -220,9 +204,6 @@ export class HomePage implements OnInit {
     if(data != ""){
       this.dataService.updateDataDir(data, this.user.id);
     }
-    else{
-      this.dataService.showToast("No se hicieron cambios.");
-    }
   }
   //Actualizar direccion
   async showAlertInputTel() {
@@ -248,9 +229,6 @@ export class HomePage implements OnInit {
     if(data != ""){
       this.dataService.updateDataTel(data, this.user.id);
     }
-    else{
-      this.dataService.showToast("No se hicieron cambios.");
-    }
   }
   //Actualizar direccion
   async showAlertInputDesc() {
@@ -275,9 +253,6 @@ export class HomePage implements OnInit {
     let data = result.data.values.desc;
     if(data != ""){
       this.dataService.updateDataDesc(data, this.user.id);
-    }
-    else{
-      this.dataService.showToast("No se hicieron cambios.");
     }
   }
 }
