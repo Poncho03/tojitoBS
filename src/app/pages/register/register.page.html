@@ -65,6 +65,23 @@
 
     <ion-card  mode="md">
       <ion-item lines="none">
+        <ion-icon slot="start" name="call"></ion-icon>
+        <ion-input
+          type="tel"
+          name="phone"
+          placeholder="Número de teléfono"
+          [(ngModel)]="user.tel"
+          pattern="^([0-9])*$"
+          minlength=10
+          maxlength=10
+          imputmode="tel"
+          required>
+        </ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card  mode="md">
+      <ion-item lines="none">
         <ion-checkbox
           color="pink"
           slot="start"

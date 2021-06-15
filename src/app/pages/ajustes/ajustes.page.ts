@@ -4,6 +4,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Usuario } from 'src/app/interface/usuario';
 import { DataService } from 'src/app/services/data.service';
+import { InfoService } from 'src/app/services/info.service';
+import { ToolsService } from 'src/app/services/tools.service';
 
 @Component({
   selector: 'app-ajustes',
@@ -19,7 +21,9 @@ export class AjustesPage implements OnInit {
     private dataService: DataService,
     private alertCtrl: AlertController,
     private firestore: AngularFirestore,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private infoService: InfoService,
+    private toolsService: ToolsService
   ) { }
 
   ngOnInit() {
@@ -50,7 +54,7 @@ export class AjustesPage implements OnInit {
         this.getUserById(id);
       }
       else{
-        this.dataService.showToast("ocurrió un error al obtener la información, por favor, intente más tarde")
+        this.toolsService.showToast("ocurrió un error al obtener la información, por favor, intente más tarde")
       }
     });
   }
@@ -91,10 +95,10 @@ export class AjustesPage implements OnInit {
     let result = await alert.onDidDismiss();
     let data = result.data.values.name;
     if(data != ""){
-      this.dataService.dataName(data, this.user.id);
+      this.infoService.dataName(data, this.user.id);
     }
     else{
-      this.dataService.showToast("No se hicieron cambios.");
+      this.toolsService.showToast("No se hicieron cambios.");
     }
   }
 
@@ -122,10 +126,10 @@ export class AjustesPage implements OnInit {
     let result = await alert.onDidDismiss();
     let data = result.data.values.pass;
     if(data != "" && data.length > 7){
-      this.dataService.dataPass(data, this.user.id);
+      this.infoService.dataPass(data, this.user.id);
     }
     else{
-      this.dataService.showToast("No se hicieron cambios.");
+      this.toolsService.showToast("No se hicieron cambios.");
     }
   }
 
@@ -137,7 +141,7 @@ export class AjustesPage implements OnInit {
       message: "Estas a punto de cerrar sesión.<br>¿Continuar?",
       buttons: [
         { text: 'Aceptar', handler: ()=>{
-          this.dataService.singOut();
+          this.infoService.singOut();
         }},
         { text: 'Cancelar', role: 'cancel'}
       ],
@@ -157,10 +161,10 @@ export class AjustesPage implements OnInit {
       buttons: [
         { text: 'Aceptar', handler: ()=>{
           this.eliminarNegocio(this.user.id).then(()=>{
-            this.dataService.eliminarUserColecc(this.user.id);
-            this.dataService.showToast("Negocio eliminado con éxito.");
+            this.infoService.eliminarUserColecc(this.user.id);
+            this.toolsService.showToast("Negocio eliminado con éxito.");
           }).catch(()=>{
-            this.dataService.showToast("Ha ocurrido un error, intente más tarde.")
+            this.toolsService.showToast("Ha ocurrido un error, intente más tarde.")
           })
         }},
         { text: 'Cancelar', role: 'cancel'}

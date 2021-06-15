@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { Usuario } from 'src/app/interface/usuario';
-import { DataService } from 'src/app/services/data.service';
+import { ToolsService } from 'src/app/services/tools.service';
 
 @Component({
   selector: 'app-register',
@@ -17,16 +18,16 @@ export class RegisterPage implements OnInit {
   }
 
   constructor(
-    private dataService: DataService
+    private toolsService: ToolsService,
+    private navCtrl: NavController
   ) { }
 
   ngOnInit() {
   }
 
   registro(){
-    localStorage.setItem('username',this.user.nombre);
-    localStorage.setItem('useremail',this.user.correo);
-    this.dataService.registro(this.user);
+    localStorage.setItem('datauser', JSON.stringify(this.user));
+    this.navCtrl.navigateRoot('form-business');
   }
 
 }

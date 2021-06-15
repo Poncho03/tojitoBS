@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-servicios',
@@ -9,25 +8,31 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class ServiciosPage implements OnInit {
 
+  @Input() rute: string;
+
   servicio: string;
   services = [];
 
   constructor(
-    private modalCtrl: ModalController,
-    private dataService: DataService
+    private modalCtrl: ModalController
   ) { }
 
   ngOnInit() {
+    if(this.rute == "form-business"){
+      this.getServicesLocal();
+    }
+    console.log(this.rute);
+  }
+
+  getServicesLocal(){
+    if(localStorage.getItem("serv")){
+      this.services = JSON.parse(localStorage.getItem("serv"));
+    }
   }
 
   addService(){
-    if(this.servicio != null){
-      this.services.push(this.servicio);
-      this.servicio = null;
-    }
-    else{
-      this.dataService.showToast("Tienes que agregar un servicio");
-    }
+    this.services.push(this.servicio);
+    this.servicio = null;
   }
 
   delete(item){

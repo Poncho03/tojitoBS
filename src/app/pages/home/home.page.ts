@@ -4,9 +4,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { Negocio } from 'src/app/interface/negocio';
 import { Usuario } from 'src/app/interface/usuario';
-import { DataService } from 'src/app/services/data.service';
-import { EditmenuPage } from '../editmenu/editmenu.page';
-import { EditservicesPage } from '../editservices/editservices.page';
+import { InfoService } from 'src/app/services/info.service';
+import { UpdateService } from 'src/app/services/update.service';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +21,8 @@ export class HomePage implements OnInit {
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
     private modalCtrl: ModalController,
-    private dataService: DataService,
+    private updateService: UpdateService,
+    private infoService: InfoService,
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController
   ) { }
@@ -100,7 +100,7 @@ export class HomePage implements OnInit {
 
   async openModalMenu(){
     const modal = await this.modalCtrl.create({
-      component: EditmenuPage,
+      component: "",
       componentProps: {
         menu: this.neg.menu
       }
@@ -113,7 +113,7 @@ export class HomePage implements OnInit {
 
   async openModalservicios(){
     const modal = await this.modalCtrl.create({
-      component: EditservicesPage,
+      component: "",
       componentProps: {
         servicios: this.neg.servicios
       }
@@ -125,7 +125,7 @@ export class HomePage implements OnInit {
   }
 
   deleteAccount(){
-    this.dataService.eliminarUserColecc(this.user.id);
+    this.infoService.eliminarUserColecc(this.user.id);
   }
 
 
@@ -152,7 +152,7 @@ export class HomePage implements OnInit {
     let result = await alert.onDidDismiss();
     let data = result.data.values.name;
     if(data != ""){
-      this.dataService.updateDataName(data, this.user.id);
+      this.updateService.updateDataName(data, this.user.id);
     }
   }
   //Actualizar eslogan
@@ -177,7 +177,7 @@ export class HomePage implements OnInit {
     let result = await alert.onDidDismiss();
     let data = result.data.values.eslogan;
     if(data != ""){
-      this.dataService.updateDataEslogan(data, this.user.id);
+      this.updateService.updateDataEslogan(data, this.user.id);
     }
   }
   //Actualizar direccion
@@ -202,7 +202,7 @@ export class HomePage implements OnInit {
     let result = await alert.onDidDismiss();
     let data = result.data.values.dir;
     if(data != ""){
-      this.dataService.updateDataDir(data, this.user.id);
+      this.updateService.updateDataDir(data, this.user.id);
     }
   }
   //Actualizar direccion
@@ -227,7 +227,7 @@ export class HomePage implements OnInit {
     let result = await alert.onDidDismiss();
     let data = result.data.values.tel;
     if(data != ""){
-      this.dataService.updateDataTel(data, this.user.id);
+      this.updateService.updateDataTel(data, this.user.id);
     }
   }
   //Actualizar direccion
@@ -252,7 +252,7 @@ export class HomePage implements OnInit {
     let result = await alert.onDidDismiss();
     let data = result.data.values.desc;
     if(data != ""){
-      this.dataService.updateDataDesc(data, this.user.id);
+      this.updateService.updateDataDesc(data, this.user.id);
     }
   }
 }

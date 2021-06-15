@@ -4,47 +4,52 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-text-center">
 
-  <ion-card mode="md">
-    <ion-item>
-      <ion-icon slot="start" name="restaurant"></ion-icon>
-      <ion-input type="text"
-                placeholder="Nombre del platillo"
-                [(ngModel)]="nombre">
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon slot="start" name="cash"></ion-icon>
-      <ion-input type="number"
-                placeholder="Precio del platillo"
-                [(ngModel)]="precio">
-      </ion-input>
-    </ion-item>
-    <ion-button (click)="addFood()"
-                expand="block"
-                color="orange"
-                mode="ios">
-      Agregar Al Menú
-    </ion-button>
-    
-  </ion-card>
+  <form #formu="ngForm">
+    <ion-card mode="md" class="ion-text-center">
+      <ion-item lines="none">
+        <ion-icon slot="start" name="restaurant"></ion-icon>
+        <ion-input type="text"
+                  name="nombre"
+                  placeholder="Nombre del platillo"
+                  [(ngModel)]="nombre"
+                  required>
+        </ion-input>
+      </ion-item>
+    </ion-card>
+  
+    <ion-card mode="md">
+      <ion-item lines="none">
+        <ion-icon slot="start" name="cash"></ion-icon>
+        <ion-input type="number"
+                  name="precio"
+                  placeholder="Precio del platillo"
+                  [(ngModel)]="precio"
+                  required>
+        </ion-input>
+      </ion-item>
+    </ion-card>
+  </form>
+
+  <ion-button (click)="addFood()"
+              [disabled]="formu.invalid"
+              color="blue"
+              mode="ios">
+    Agregar
+  </ion-button>
 
   <ion-card *ngIf="menuFull.length != 0" mode="md">
     <ion-card-content>
       <ion-item *ngFor="let item of menuFull">
+        <ion-icon slot="start" name="trash" (click)="delete(item)"></ion-icon>
         <ion-label class="ion-text-wrap ion-text-capitalize">{{item.nombre}}</ion-label>
         <ion-label class="ion-text-right">$ {{item.precio}}</ion-label>
-        <ion-buttons slot="start">
-          <ion-button (click)="delete(item)">
-            <ion-icon slot="icon-only" name="trash"></ion-icon>
-          </ion-button>
-        </ion-buttons>
       </ion-item>
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="menuFull.length == 0" mode="md">
+  <ion-card *ngIf="menuFull.length == 0" mode="md" style="padding: 0 3% 0 3%;">
     <ion-card-title class="ion-text-center">
       <br>Los platillos que agregues se irán visualizando en esta sección<br><br>
     </ion-card-title>
@@ -55,8 +60,8 @@
 <ion-footer class="ion-no-border">
   <ion-button (click)="saveMenu()"
               expand="block"
-              color="purple"
+              color="pink"
               mode="ios">
-    Guardar Menú
+    Guardar y salir
   </ion-button>
 </ion-footer>

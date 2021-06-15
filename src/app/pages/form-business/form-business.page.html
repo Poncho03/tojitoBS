@@ -1,0 +1,133 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Registro de Negocio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="base">
+    <ion-text class="ion-text-capitalize"><h2>Bienvenido {{nombre}}</h2></ion-text>
+    <ion-text color="dark">
+      <p>Ingrese la información que se le solicita para poder
+        continuar con el registro de su negocio.</p>
+    </ion-text>
+  </div>
+
+  <form #formulario="ngForm">
+
+    <ion-card>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="storefront"></ion-icon>
+        <ion-input
+          type="text"
+          name="nombreneg"
+          placeholder="Ingresa el nombre de tu negocio"
+          [(ngModel)]="negocio.nombre"
+          required>
+        </ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="map"></ion-icon>
+        <ion-input
+          type="text"
+          name="direccion"
+          placeholder="Ingresa la dirección de tu negocio"
+          [(ngModel)]="negocio.direccion"
+          required>
+        </ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="call"></ion-icon>
+        <ion-input
+          type="tel"
+          imputmode="tel"
+          name="telefono"
+          minlength=10
+          maxlength=10
+          pattern="^([0-9])*$"
+          placeholder="Ingresa un teléfono del negocio"
+          [(ngModel)]="negocio.tel"
+          required>
+        </ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="megaphone"></ion-icon>
+        <ion-input
+          type="text"
+          name="eslogan"
+          placeholder="Eslogan del negocio"
+          [(ngModel)]="negocio.eslogan"
+          required>
+        </ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="pencil"></ion-icon>
+        <ion-input
+          type="text"
+          name="desc"
+          placeholder="Breve descripción de tu negocio"
+          [(ngModel)]="negocio.desc"
+          required>
+        </ion-input>
+      </ion-item>
+    </ion-card>
+
+  </form>
+
+  <ion-grid mode="md">
+    <ion-row>
+
+      <ion-col>
+        <ion-card class="ion-text-center extra" color="{{colorMenu}}" (click)="getMenu()">
+          <ion-icon size="large" name="list"></ion-icon>
+          <ion-card-header>
+            <ion-card-title>Menú</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+      <ion-col>
+        <ion-card class="ion-text-center extra" color="{{colorServ}}" (click)="getServices()">
+          <ion-icon size="large" name="hand-right"></ion-icon>
+          <ion-card-header>
+            <ion-card-title>Servicios</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+      <ion-col>
+        <ion-card class="ion-text-center extra" color="{{colorFoto}}" (click)="getPhotos()">
+          <ion-icon size="large" name="image"></ion-icon>
+          <ion-card-header>
+            <ion-card-title>Fotos</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+  
+</ion-content>
+
+<ion-footer>
+  <ion-button (click)="registrar()"
+                expand="block"
+                color="blue"
+                mode="ios"
+                [disabled]="formulario.invalid || (menu || serv || foto)">
+      Registrar negocio
+  </ion-button>
+</ion-footer>

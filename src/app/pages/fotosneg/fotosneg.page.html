@@ -1,16 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Agregar Fotos Del Negocio</ion-title>
+    <ion-title>Agregar Fotos</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-text-center">
 
-  <ion-button (click)="openActionSheetPhotos()" expand="block" disabled="{{this.numFotos == 0}}">
+  <div class="base">
+    <ion-text color="dark">
+      <p>
+        Presione en el botón para sleccionar las fotos que
+        vaya a agregar de su negocio. Al finalizar pulse
+        "Guardar y salir" para continuar.
+      </p>
+      <p>Puede agregar hasta 3 fotografías.</p>
+    </ion-text>
+  </div>
+
+  <ion-button (click)="openActionSheetPhotos()"
+              color="blue"
+              mode="ios"
+              disabled="{{this.numFotos == 0}}">
     Insertar foto ({{numFotos}})
   </ion-button>
 
-  <ion-card *ngIf="auxFotos.length === 0">
+  <ion-card *ngIf="auxFotos.length === 0" mode="md" style="padding: 0 3% 0 3%;">
     <ion-card-title class="ion-text-center">
       <br>Las fotos que agregues se irán visualizando en esta sección<br><br>
     </ion-card-title>
@@ -29,9 +43,12 @@
 
 </ion-content>
 
-<ion-footer>
-  <ion-button (click)="savePhotos()" expand="block" color="purple">
-    Guardar Fotos
+<ion-footer class="ion-no-border">
+  <ion-button (click)="savePhotos()"
+              expand="block"
+              color="pink"
+              mode="ios">
+    Guardar y salir
   </ion-button>
 </ion-footer>
 

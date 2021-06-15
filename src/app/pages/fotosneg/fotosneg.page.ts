@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActionSheetController, ModalController } from '@ionic/angular';
-import { DataService } from 'src/app/services/data.service';
 import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-fotosneg',
@@ -11,26 +9,30 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class FotosnegPage implements OnInit {
 
-  userID: string;
-  auxFotos: string[] = [];
-  linksFotos: string[] = [];
-  numFotos: number =  3;
+  @Input() rute: string;
+
+  auxFotos: string[];
+  numFotos: number = 3;
 
   constructor(
     private modalCtrl: ModalController,
-    private actionSheetCtrl: ActionSheetController,
-    private dataService: DataService,
-    private afAuth: AngularFireAuth
-  ) { }
-
-  ngOnInit() {
-    this.getInfoUser();
+    private actionSheetCtrl: ActionSheetController
+  ) {
+    this.auxFotos = [];
   }
 
-  getInfoUser(){
-    this.afAuth.onAuthStateChanged( data => {
-      this.userID = data.uid;
-    })
+  ngOnInit() {
+    if(this.rute == "form-business"){
+      this.getPhotosLocal();
+    }
+  }
+
+  getPhotosLocal(){
+    if(localStorage.getItem("foto")){
+      this.auxFotos = JSON.parse(localStorage.getItem("foto"));
+      this.numFotos = 3 - this.auxFotos.length;
+      console.log(this.auxFotos);
+    }
   }
 
   async openActionSheetPhotos(){
@@ -58,6 +60,7 @@ export class FotosnegPage implements OnInit {
     });
     this.auxFotos.push(image.dataUrl);
     this.numFotos = 3 - this.auxFotos.length;
+    console.log(this.auxFotos);
   }
 
   borrarFoto(item){
@@ -66,9 +69,16 @@ export class FotosnegPage implements OnInit {
     this.numFotos = 3 - this.auxFotos.length;
   }
 
+  savePhotos(){
+    this.modalCtrl.dismiss({
+      fotos: this.auxFotos
+    });
+  }
+
+  /*
   async savePhotos(){
     if (this.auxFotos.length == 0) {
-      this.dataService.showToast("Tiene que agregar al menos una fotografía.");
+      this.toolsService.showToast("Tiene que agregar al menos una fotografía.");
     }
     else {
       this.linksFotos = await this.dataService.downloadFile(await this.dataService.uploadFile(this.auxFotos, this.userID));
@@ -77,5 +87,6 @@ export class FotosnegPage implements OnInit {
       });
     }
   }
+  */
 
 }
